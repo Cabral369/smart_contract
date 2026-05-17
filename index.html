@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FidelityProtocol — Web3</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="orb2"></div>
+
+    <header>
+      <div class="logo">
+        <div class="logo-icon">🏆</div>
+        <div>
+          <div class="logo-text">Fidelity<span>Protocol</span></div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="network-badge">
+          <div class="network-dot"></div>
+          Sepolia Testnet
+        </div>
+        <button id="btn-connect" onclick="connectWallet()">
+          Conectar Carteira
+        </button>
+        <div id="wallet-info">
+          <div class="wallet-address" id="wallet-address">—</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="hero-tag">⬡ WEB3 FIDELITY PROTOCOL</div>
+        <h1>
+          Recompensas <span>descentralizadas</span><br />sem intermediários
+        </h1>
+        <p>
+          Faça stake de tokens FDL, acumule recompensas ajustadas pelo mercado e
+          ganhe NFTs exclusivos de fidelidade.
+        </p>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-label">SEU SALDO FDL</span>
+          <span class="stat-value accent" id="stat-saldo">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">EM STAKE</span>
+          <span class="stat-value" id="stat-stake">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">RECOMPENSA PENDENTE</span>
+          <span class="stat-value green" id="stat-recompensa">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">PREÇO ETH/USD</span>
+          <span class="stat-value purple" id="stat-eth">—</span>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <!-- TOKEN -->
+        <div class="card token">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">🪙</div>
+              <div>
+                <div class="card-title">FidelityToken</div>
+                <div class="card-subtitle">0x719e...fb13</div>
+              </div>
+            </div>
+            <span class="card-badge badge-erc20">ERC-20</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">SEU SALDO</span>
+            <span class="info-value" id="token-saldo">Conecte a carteira</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">SÍMBOLO</span>
+            <span class="info-value">FDL</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">DECIMAIS</span>
+            <span class="info-value">18</span>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">QUEIMAR TOKENS (BURN)</label>
+            <input
+              type="number"
+              id="burn-amount"
+              placeholder="Quantidade FDL"
+              min="0"
+              step="1"
+            />
+            <button class="btn btn-outline" onclick="burnTokens()">
+              Queimar FDL
+            </button>
+          </div>
+        </div>
+
+        <!-- NFT -->
+        <div class="card nft">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">🎖️</div>
+              <div>
+                <div class="card-title">FidelityNFT</div>
+                <div class="card-subtitle">0x815A...ACAB</div>
+              </div>
+            </div>
+            <span class="card-badge badge-erc721">ERC-721</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">STATUS</span>
+            <span class="info-value" id="nft-status">Conecte a carteira</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">TOTAL EMITIDOS</span>
+            <span class="info-value" id="nft-total">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">REQUISITO</span>
+            <span class="info-value" style="color: var(--muted)"
+              >500 FDL em rewards</span
+            >
+          </div>
+
+          <div class="nft-badge" id="nft-badge">
+            <div class="nft-emoji">🔒</div>
+            <div class="nft-text">
+              Acumule 500 FDL em recompensas<br />para desbloquear seu
+              distintivo
+            </div>
+          </div>
+        </div>
+
+        <!-- STAKING -->
+        <div class="card staking">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">⚡</div>
+              <div>
+                <div class="card-title">Staking</div>
+                <div class="card-subtitle">0x18fB...9851</div>
+              </div>
+            </div>
+            <span class="card-badge badge-staking">STAKING</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">TOKENS EM STAKE</span>
+            <span class="info-value" id="stake-amount">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">RECOMPENSA ACUMULADA</span>
+            <span
+              class="info-value"
+              id="stake-reward"
+              style="color: var(--accent3)"
+              >—</span
+            >
+          </div>
+          <div class="info-row">
+            <span class="info-label">MULTIPLICADOR</span>
+            <span class="info-value" id="stake-multi">—</span>
+          </div>
+
+          <div class="chainlink-box">
+            <div class="chainlink-icon">⬡</div>
+            <div>
+              <div class="chainlink-label">CHAINLINK ETH/USD</div>
+              <div class="chainlink-value" id="eth-price">Carregando...</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">QUANTIDADE DE FDL</label>
+            <input
+              type="number"
+              id="stake-input"
+              placeholder="Ex: 100"
+              min="0"
+              step="1"
+            />
+            <div class="btn-row">
+              <button class="btn btn-green" onclick="fazerStake()">
+                ⬆ Fazer Stake
+              </button>
+              <button class="btn btn-outline" onclick="retirarStake()">
+                ⬇ Retirar
+              </button>
+            </div>
+            <button
+              class="btn btn-primary"
+              style="margin-top: 8px"
+              onclick="resgatarRecompensa()"
+            >
+              🎁 Resgatar Recompensa
+            </button>
+          </div>
+        </div>
+
+        <!-- DAO -->
+        <div class="card dao">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">🏛️</div>
+              <div>
+                <div class="card-title">Governance DAO</div>
+                <div class="card-subtitle">0x24A0...96E4</div>
+              </div>
+            </div>
+            <span class="card-badge badge-dao">DAO</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">TOTAL DE PROPOSTAS</span>
+            <span class="info-value" id="dao-total">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">QUÓRUM MÍNIMO</span>
+            <span class="info-value" style="color: var(--warn)">100 FDL</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">DURAÇÃO DE VOTAÇÃO</span>
+            <span class="info-value">1 dia</span>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="input-group">
+            <label class="input-label"
+              >CRIAR PROPOSTA (NOVA RECOMPENSA BASE)</label
+            >
+            <input
+              type="number"
+              id="dao-valor"
+              placeholder="Novo valor em FDL (ex: 2)"
+            />
+            <input
+              type="text"
+              id="dao-desc"
+              placeholder="Descrição da proposta"
+            />
+            <button class="btn btn-warn" onclick="criarProposta()">
+              + Criar Proposta
+            </button>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="input-group">
+            <label class="input-label">CONSULTAR / VOTAR EM PROPOSTA</label>
+            <input
+              type="number"
+              id="dao-id"
+              placeholder="ID da proposta (ex: 1)"
+              min="1"
+            />
+            <div id="proposta-info"></div>
+            <div class="btn-row" style="margin-top: 8px">
+              <button class="btn btn-outline" onclick="consultarProposta()">
+                🔍 Consultar
+              </button>
+              <button class="btn btn-warn" onclick="executarProposta()">
+                ⚡ Executar
+              </button>
+            </div>
+            <div class="btn-row" style="margin-top: 6px">
+              <button
+                class="btn btn-favor btn-sm"
+                style="padding: 10px"
+                onclick="votar(true)"
+              >
+                ✅ Votar Favor
+              </button>
+              <button
+                class="btn btn-contra btn-sm"
+                style="padding: 10px"
+                onclick="votar(false)"
+              >
+                ❌ Votar Contra
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        FidelityProtocol — Sepolia Testnet &nbsp;|&nbsp;
+        <a
+          href="https://sepolia.etherscan.io/address/0x18fB769936fF3D9F65B47D4F003A537203849851"
+          target="_blank"
+          >Staking</a
+        >
+        ·
+        <a
+          href="https://sepolia.etherscan.io/address/0x719e6C427DA1DBFF7800DF3B2c1cD59b88e1fb13"
+          target="_blank"
+          >Token</a
+        >
+        ·
+        <a
+          href="https://sepolia.etherscan.io/address/0x815AF36fbC0D24c5dFC86eCc3A3881255A89ACAB"
+          target="_blank"
+          >NFT</a
+        >
+        ·
+        <a
+          href="https://sepolia.etherscan.io/address/0x24A00a58c0eBf54873F4D6594f1892b1e3B696E4"
+          target="_blank"
+          >Governance</a
+        >
+      </p>
+    </footer>
+
+    <div id="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -24,7 +24,8 @@ Staking
 
 **Cadeia de controle (ownership):**
 
-Você → Governance → Staking → FidelityToken → FidelityNFT
+Você → Governance → Staking → FidelityToken
+→ FidelityNFT
 
 ---
 
@@ -41,39 +42,31 @@ Você → Governance → Staking → FidelityToken → FidelityNFT
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Como Usar
 
 ### Pré-requisitos
 
-- Node.js 18+
-- MetaMask com ETH de teste na Sepolia
-- Conta Infura (RPC)
+- Extensão [MetaMask](https://metamask.io/) instalada no browser
+- ETH de teste na Sepolia — obtenha em [sepoliafaucet.com](https://sepoliafaucet.com)
 
-### Instalação
+### Executar a interface
 
-bash
-git clone https://github.com/seu-usuario/fidelidade-web3
-cd fidelidade-web3
-npm install ethers
-
-### Configuração
-
-Edite o arquivo `interact.js` e preencha o `CONFIG`:
-
-javascript
-const CONFIG = {
-RPC_URL: "https://sepolia.infura.io/v3/SEU_INFURA_KEY",
-PRIVATE_KEY: "SUA_PRIVATE_KEY",
-FIDELITY_TOKEN: "0x719e6C427DA1DBFF7800DF3B2c1cD59b88e1fb13",
-FIDELITY_NFT: "0x815AF36fbC0D24c5dFC86eCc3A3881255A89ACAB",
-STAKING: "0x18fB769936fF3D9F65B47D4F003A537203849851",
-GOVERNANCE: "0x24A00a58c0eBf54873F4D6594f1892b1e3B696E4",
-};
-
-### Executar o script
+1. Clone o repositório:
 
 bash
-node interact.js
+git clone https://github.com/Cabral369/smart_contract
+cd smart_contract
+
+2. Abra o arquivo `index.html` diretamente no browser:
+
+Clique duas vezes no index.html
+ou arraste para o browser
+
+3. Clique em **Conectar Carteira** e autorize a MetaMask
+
+4. Certifique-se de estar na rede **Sepolia** na MetaMask
+
+> Nenhuma instalação de dependências necessária — o ethers.js é carregado via CDN.
 
 ---
 
@@ -128,7 +121,7 @@ node interact.js
 ├── FidelityNFT.sol # NFT ERC-721 de fidelidade
 ├── Staking.sol # Contrato central de staking
 ├── Governance.sol # DAO simplificada
-├── interact.js # Script ethers.js de integração
+├── index.html # Interface Web3 (ethers.js via CDN)
 └── README.md
 
 ---
@@ -146,12 +139,12 @@ node interact.js
 - [Solidity](https://soliditylang.org/) `^0.8.0`
 - [OpenZeppelin Contracts](https://openzeppelin.com/contracts/)
 - [Chainlink Price Feeds](https://docs.chain.link/data-feeds)
-- [ethers.js](https://docs.ethers.org/) `v6`
+- [ethers.js](https://docs.ethers.org/) `v6` via CDN
 - [Remix IDE](https://remix.ethereum.org/)
+- [MetaMask](https://metamask.io/)
 
 ---
 
 ## 👨‍💻 Autor
 
 Desenvolvido como projeto final da disciplina **Web 3.0 — Residência em TIC 29**
-Prof. Bruno Portes
